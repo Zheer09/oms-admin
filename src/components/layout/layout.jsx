@@ -4,19 +4,24 @@ import './layout.css'
 
 import { BrowserRouter } from 'react-router-dom'
 import Sidebar from '../sidebar/Sidebar'
+import TopNav from '../topnav/TopNav'
 import Routers from '../routes'
 
 const Layout = () => {
+  console.log()
   return (
 
     <BrowserRouter>
+    
        <div className='layout'>
-       <Sidebar />
+        
+       <Sidebar/>
           <div className="layout__content">
-          </div>
+          <TopNav/>
           <div className="layout__content-main">
-            <Routers />
+        <Routers />
           </div>
+        </div>
         </div>
     </BrowserRouter>
   )
