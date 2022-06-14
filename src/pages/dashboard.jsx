@@ -24,7 +24,7 @@ const Dashboard = () => {
   }
 
   const formStatus = {
-    "processing": "primary",
+    "In Progress": "primary",
     "pending": "warning",
     "Done": "success",
     "Cancled": "danger"
@@ -57,24 +57,32 @@ const renderOrderBody = (item, index) => (
   const [total_pendingForms , setTotal_pendingForms] = useState([])
 
   useEffect(() => {
-    Axios.get("http://localhost:8080/api/getAllacc").then((response) => {
-      setTotal_acc(response.data);
+      getAcc()
+  },[])
 
-      for(let i = 0 ; i<total_Acc.length;i++){
-        if(total_Acc[i].typeacc === "citizen" ){
-          setTotal_CT(response.data);
+  const getAcc = async ()=> {
+    const response = await fetch ('http://localhost:8080/api/getAllacc');
 
-         }
-         else if(total_Acc[i].typeacc === "maintainer" ){
-          setTotal_MT(response.data);
+    if(response){
+      const json = await response.json();
+      setTotal_acc(json);
+  
+    for(let i = 0 ; i<json.length;i++){
+      if(json[i].typeacc === "citizen" ){
+        setTotal_CT(json);
+        
+       }
+       else{
+        setTotal_MT(json)
+       }
+    }
+      return json;
+  }else{
+      console.error('search Terms','Error in request');
+      return [];
+  }
 
-         }
-      }
-     
-    })
-    
-  },[total_Acc.length])
-
+  }
 
   const getForms = async ()=> {
     const response = await fetch ('http://localhost:8080/api/getallForms');

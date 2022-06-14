@@ -51,20 +51,31 @@ const renderOrderBody = (item, index) => (
     const [total_Acc , setTotal_acc] = useState([])
 
 
-  useEffect(() => {
-    Axios.get("http://localhost:8080/api/getAllacc").then((response) => {
-      setTotal_acc(response.data);
+    useEffect(() => {
+      getAcc()
+  },[])
 
-      for(let i = 0 ; i<total_Acc.length;i++){
-        if(total_Acc[i].typeacc === "citizen" ){
-          setCT_acc(response.data);
+  const getAcc = async ()=> {
+    const response = await fetch ('http://localhost:8080/api/getAllacc');
 
-         }
-      }
-     
-    })
-    
-  },[total_Acc.length])
+    if(response){
+      const json = await response.json();
+      setTotal_acc(json);
+  
+    for(let i = 0 ; i<json.length;i++){
+      if(json[i].typeacc === "citizen" ){
+        setCT_acc(json);
+        
+       }
+    }
+      return json;
+  }else{
+      console.error('search Terms','Error in request');
+      return [];
+  }
+
+  }
+
 
   return (
     <div>

@@ -24,7 +24,7 @@ const Forms = () => {
   }
 
   const formStatus = {
-    "processing": "primary",
+    "In Progress": "primary",
     "pending": "warning",
     "Done": "success",
     "Cancled": "danger"
