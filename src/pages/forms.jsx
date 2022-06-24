@@ -5,10 +5,6 @@ import Table from '../components/table/Table'
 import Badge from '../components/badge/badge'
 
 
-
-import { Link } from 'react-router-dom'
-
-
 const Forms = () => {
 
 
@@ -47,7 +43,8 @@ const renderOrderBody = (item, index) => (
 )
 
     function funcctionName () {
-      <Link to='/singleForm'></Link>
+      
+      
     } 
 
   const [total_forms , setTotal_forms] = useState([])

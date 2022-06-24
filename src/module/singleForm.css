@@ -1,6 +1,39 @@
-@media (max-width: 50px) {
-    .carousel {
-      width:100px;
-      height:auto;
-    }
+
+.each-slide > div {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 350px;
+  border-radius: 1.5%;
+}
+
+.each-slide span {
+  padding: 15px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
+}
+
+
+.col-61 {
+  margin: 0 auto; /* Added */
+  max-width:100%;
+  width: 330px;
+}
+
+.col-62 {
+  margin:  auto; /* Added */
+  max-width:100%;
+  max-width:100%;
+ 
+}
+
+.card1 {
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: var(--main-bg);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
 }
