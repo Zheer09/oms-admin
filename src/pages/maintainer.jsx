@@ -54,7 +54,7 @@ const renderOrderBody = (item, index) => (
   },[])
 
   const getAcc = async ()=> {
-    const response = await fetch ('http://localhost:8080/api/getAllacc');
+    const response = await fetch ('http://omsbackend-env-1.eba-h7v7nmn9.us-east-1.elasticbeanstalk.com/api/getAllacc');
 
     if(response){
       const json = await response.json();
