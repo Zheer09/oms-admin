@@ -4,6 +4,7 @@ import StatusCard from '../components/statusCard/StatusCard'
 import Table from '../components/table/Table'
 import Badge from '../components/badge/badge'
 
+import { Link } from 'react-router-dom'
 
 const Forms = () => {
 
@@ -31,7 +32,7 @@ const renderOrderHead = (item, index) => (
 )
 
 const renderOrderBody = (item, index) => (
-  <tr onClick={funcctionName} key={index}>
+  <tr key={index}>
       <td>{item.formId}</td>
       <td>{item.title}</td>
       <td>{item.department}</td>
@@ -39,13 +40,12 @@ const renderOrderBody = (item, index) => (
       <td>
           <Badge type={formStatus[item.status]} content={item.status}/>
       </td>
+      <td>
+        <button className={`badge badge-primary`}><Link to="/singleForm" state={{fo: item}}>View</Link></button>
+      </td>
   </tr>
 )
 
-    function funcctionName () {
-      
-      
-    } 
 
   const [total_forms , setTotal_forms] = useState([])
 

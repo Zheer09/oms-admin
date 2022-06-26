@@ -32,20 +32,21 @@ const renderOrderHead = (item, index) => (
 )
 
 const renderOrderBody = (item, index) => (
-  <tr onClick={funcctionName} key={index}>
+  <tr  key={index}>
       <td>{item.emailaddress}</td>
       <td>{item.firstName}</td>
       <td>{item.lastName}</td>
       <td>0{item.phone_num}</td>
       <td>{item.jobTitle}</td>
+      <td>
+        <button className={`badge badge-primary`}><Link to="/singleForm">View</Link></button>
+      </td>
   </tr>
 )
 
-    function funcctionName () {
-      console.log("Test again");
-    } 
 
-    const [total_MT , setCT_acc] = useState([])
+
+    const [total_MT , setMT_acc] = useState([])
     const [total_Acc , setTotal_acc] = useState([])
 
 
@@ -61,8 +62,10 @@ const renderOrderBody = (item, index) => (
       setTotal_acc(json);
   
     for(let i = 0 ; i<json.length;i++){
+
       if(json[i].typeacc === "maintainer" ){
-        setCT_acc(json);
+        total_MT.push(json[i]);
+        // setMT_acc([...total_MT, json[i]]);
         
        }
     }

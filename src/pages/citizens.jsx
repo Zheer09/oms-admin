@@ -32,7 +32,7 @@ const renderOrderHead = (item, index) => (
 )
 
 const renderOrderBody = (item, index) => (
-  <tr onClick={funcctionName} key={index}>
+  <tr key={index}>
       <td>{item.emailaddress}</td>
       <td>{item.firstName}</td>
       <td>{item.lastName}</td>
@@ -40,21 +40,22 @@ const renderOrderBody = (item, index) => (
       <td>
           <Badge type={formStatus[item.status]} content={item.status}/>
       </td>
+      <td>
+        <button className={`badge badge-primary`}><Link to="/singleForm">View</Link></button>
+      </td>
   </tr>
 )
 
-    function funcctionName () {
-
-      
-        
-    } 
 
     const [total_CT , setCT_acc] = useState([])
     const [total_Acc , setTotal_acc] = useState([])
+    const [inx , set_inx] = useState(0)
+
 
 
     useEffect(() => {
-      getAcc()
+      getAcc();
+      console.log("slaw")
   },[])
 
   const getAcc = async ()=> {
@@ -63,13 +64,18 @@ const renderOrderBody = (item, index) => (
     if(response){
       const json = await response.json();
       setTotal_acc(json);
-  
+
+      console.log(json.length);
     for(let i = 0 ; i<json.length;i++){
-      if(json[i].typeacc === "citizen" ){
-        setCT_acc(json);
-        
+      if(json[i].typeacc == "citizen" ){
+        total_CT.push(json[i]);
+        // setCT_acc([...total_CT, json[i]]);
+      
        }
+       
     }
+
+    
       return json;
   }else{
       console.error('search Terms','Error in request');

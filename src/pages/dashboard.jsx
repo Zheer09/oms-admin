@@ -4,6 +4,8 @@ import StatusCard from '../components/statusCard/StatusCard'
 import Table from '../components/table/Table'
 import Badge from '../components/badge/badge'
 
+import SingleForm from '../pages/singleForm';
+
 
 
 import { Link } from 'react-router-dom'
@@ -35,7 +37,7 @@ const renderOrderHead = (item, index) => (
 )
 
 const renderOrderBody = (item, index) => (
-  <tr onClick={funcctionName} key={index}>
+  <tr key={index}>
       <td>{item.formId}</td>
       <td>{item.title}</td>
       <td>{item.department}</td>
@@ -43,24 +45,23 @@ const renderOrderBody = (item, index) => (
       <td>
           <Badge type={formStatus[item.status]} content={item.status}/>
       </td>
+      <td>
+        <button className={`badge badge-primary`}><Link to="/singleForm">View</Link></button>
+      </td>
   </tr>
 )
-
-    function funcctionName () {
-      console.log("Test again");
-      
-    } 
 
   const [total_Acc , setTotal_acc] = useState([])
   const [total_CT , setTotal_CT] = useState([])
   const [total_MT , setTotal_MT] = useState([])
   const [total_forms , setTotal_forms] = useState([])
   const [total_pendingForms , setTotal_pendingForms] = useState([])
+ 
 
   useEffect(() => {
-      getAcc()
-  },[])
-
+    getAcc();
+},[])
+ 
   const getAcc = async ()=> {
     const response = await fetch ('http://omsbackend-env-1.eba-h7v7nmn9.us-east-1.elasticbeanstalk.com/api/getAllacc');
 
@@ -68,14 +69,19 @@ const renderOrderBody = (item, index) => (
       const json = await response.json();
       setTotal_acc(json);
   
-    for(let i = 0 ; i<json.length;i++){
-      if(json[i].typeacc === "citizen" ){
-        setTotal_CT(json);
+      console.log(json.length);
+    for(let i = 0 ; i<=json.length;i++){
+      if(json[i].typeacc == "citizen" ){
+
+        total_CT.push(json[i])
+        // setTotal_CT([...total_CT, json[i]]);
         
        }
-       else{
-        setTotal_MT(json)
+       if(json[i].typeacc == "maintainer"){
+        total_MT.push(json[i])
+        // setTotal_MT([...total_MT, json[i]]);
        }
+       
     }
       return json;
   }else{
@@ -94,7 +100,7 @@ const renderOrderBody = (item, index) => (
   
     for(let i = 0 ; i<json.length;i++){
       if(json[i].status === "pending" ){
-        setTotal_pendingForms(json);
+        setTotal_pendingForms([...total_pendingForms, json[i]]);
         
        }
     }

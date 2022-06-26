@@ -3,6 +3,9 @@ import React from 'react';
 import '../module/singleForm.css'
 import { Slide } from 'react-slideshow-image';
 
+import { useLocation } from 'react-router-dom';
+
+
 import image1 from '../assets/images/krg-logo.png';
 import image2 from '../assets/images/krg-logo.png';
 import image3 from '../assets/images/logo.png';
@@ -25,7 +28,11 @@ const edit={
   transitionDuration: 600
 }
 
+
+
 const SingleForm = () => {
+  const location = useLocation();
+  console.log(location);
   return (
     <div>
       
@@ -43,7 +50,6 @@ const SingleForm = () => {
         </Slide>
       </div>
 
-         
     </div>
     
     </div>
@@ -54,11 +60,11 @@ const SingleForm = () => {
             <div className="card" style={{backgroundColor: "white" , boxShadow:"rgba(149, 157, 165, 0.2) 0px 8px 24px" , borderRadius:"15px" ,   margin: "auto"}}>
             <div className="card__body"> 
             
-            <h3>Title: </h3>
+           <p><strong>Title: </strong>{location.state.fo.title} </p>
             <br/>
-            <h3>Issue Type: </h3>
+            <h3>Issue Type: {location.state.fo.issueType}</h3>
             <br/>
-            <h3>Department: </h3>
+            <h3>Department: {location.state.fo.department}</h3>
             <br/>
             </div>
 
